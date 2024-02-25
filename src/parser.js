@@ -1,6 +1,5 @@
 import yaml from 'js-yaml';
-import { getFormat } from '.';
-import _ from 'lodash';
+import { getFormat, readFile } from '.';
 
 const parseFile = (filename) => {
   switch(getFormat(filename)) {
@@ -13,14 +12,4 @@ const parseFile = (filename) => {
   }
 };
 
-const getDiff = (objectOne, objectTwo) => {
-  const keysOne = Object.keys(objectOne);
-  const keysTwo = Object.keys(objectTwo);
-
-  const concatenatedKeys = _sortBy([...keysOne, ...keysTwo]);
-
-  const result = {};
-  return result;
-};
-
-export { parseFile, getSortedFile };
+export { parseFile };
