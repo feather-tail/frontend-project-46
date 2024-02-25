@@ -1,5 +1,5 @@
 import yaml from 'js-yaml';
-import { getFormat, readFile } from '.';
+import { getFormat, readFile } from './index.js';
 
 const parseFile = (filename) => {
   switch(getFormat(filename)) {

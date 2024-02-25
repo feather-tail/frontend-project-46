@@ -1,11 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-const process = require('process');
-import parseFile from './parser.js';
+import { parseFile } from './parser.js';
 import _ from 'lodash';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
-const readFile = (filepath) => fs.readFileSync(getAbsolutPath(filepath), 'utf-8');
+const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
 const getFormat = (filename) => filename.split('.')[1];
 
 const gettingDifferences = (objOne, objTwo) => {
