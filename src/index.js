@@ -41,4 +41,4 @@ const getDiff = (objectOne, objectTwo) => {
   return resultData;
 };
 
-export { getAbsolutePath, readFile, getFormat, getDiff };
+export { getAbsolutePath, readFile, getFormat, gettingDifferences, getDiff };
