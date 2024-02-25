@@ -13,6 +13,12 @@ const gettingDifferences = () => {
   const keysSecond = Object.keys(objectTwo);
 
   const sortedKeys = _.sortBy([...keysFirst, ...keysSecond]);
+
+  const showDiff = sortedKeys.map((key) => {
+
+  });
+
+  return showDiff;
 };
 
 const getDiff = (objectOne, objectTwo) => {
