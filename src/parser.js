@@ -13,6 +13,14 @@ const parseFile = (filename) => {
   }
 };
 
-const getSortedFile = (filename) => _.sortBy(parseFile(filename));
+const getDiff = (objectOne, objectTwo) => {
+  const keysOne = Object.keys(objectOne);
+  const keysTwo = Object.keys(objectTwo);
+
+  const concatenatedKeys = _sortBy([...keysOne, ...keysTwo]);
+
+  const result = {};
+  return result;
+};
 
 export { parseFile, getSortedFile };
