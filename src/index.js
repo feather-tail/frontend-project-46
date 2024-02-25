@@ -8,14 +8,23 @@ const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const readFile = (filepath) => fs.readFileSync(getAbsolutPath(filepath), 'utf-8');
 const getFormat = (filename) => filename.split('.')[1];
 
-const gettingDifferences = () => {
-  const keysFirst = Object.keys(objectOne);
-  const keysSecond = Object.keys(objectTwo);
+const gettingDifferences = (objOne, objTwo) => {
+  const keysFirst = Object.keys(objOne);
+  const keysSecond = Object.keys(objTwo);
 
   const sortedKeys = _.sortBy([...keysFirst, ...keysSecond]);
 
   const showDiff = sortedKeys.map((key) => {
-
+    if (!(key in objOne)) {
+      return { key: key, value: objTwo[key], type: 'added' };
+    }
+    if (!(key in objTwo)) {
+      return { key: key, value: objOne[key], type: 'removed' };
+    }
+    if (objOne[key] !== objTwo[key]) {
+      return { key: key, valueBefore: objOne[key], valueAfter: objTwo[key], type: 'changed' };
+    }
+    return { key: key, value: objOne[key], type: 'unchanged' };
   });
 
   return showDiff;
