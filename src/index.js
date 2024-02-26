@@ -1,17 +1,28 @@
 import fs from 'fs';
 import path from 'path';
-import { parseFile } from './parser.js';
 import _ from 'lodash';
+import yaml from 'js-yaml';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
-const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
-const getFormat = (filename) => filename.split('.')[1];
+const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath, 'utf-8'));
+const getFormat = (filename) => path.extname(filename).slice(1);
+
+const parseFile = (filename) => {
+  switch(getFormat(filename)) {
+    case 'json':
+      return JSON.parse(readFile(filename));
+    case 'yaml':
+      return yaml.load(readFile(filename));
+    default:
+      throw new Error('This format is not supported');
+  }
+};
 
 const gettingDifferences = (objOne, objTwo) => {
   const keysFirst = Object.keys(objOne);
   const keysSecond = Object.keys(objTwo);
 
-  const sortedKeys = _.sortBy([...keysFirst, ...keysSecond]);
+  const sortedKeys = _.sortBy(_.union(keysFirst, keysSecond));
 
   const showDiff = sortedKeys.map((key) => {
     if (!(key in objOne)) {
@@ -29,12 +40,9 @@ const gettingDifferences = (objOne, objTwo) => {
   return showDiff;
 };
 
-const getDiff = (objectOne, objectTwo) => {
-  const dataFirst = readFile(objectOne);
-  const dataSecond = readFile(objectTwo);
-
-  const parsedDataFirst = parseFile(dataFirst);
-  const parsedDataSecond = parseFile(dataSecond);
+const getDiff = (file1, file2) => {
+  const parsedDataFirst = parseFile(file1);
+  const parsedDataSecond = parseFile(file2);
 
   const resultData = gettingDifferences(parsedDataFirst, parsedDataSecond);
   return resultData;
