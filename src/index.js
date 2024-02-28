@@ -22,23 +22,27 @@ const gettingDifferences = (objOne, objTwo) => {
   const keysFirst = Object.keys(objOne);
   const keysSecond = Object.keys(objTwo);
 
-  const sortedKeys = _.sortBy(_.union(keysFirst, keysSecond));
+  const allKeys = _.sortBy(_.union(keysFirst, keysSecond));
 
-  const showDiff = sortedKeys.map((key) => {
+  const diff = allKeys.reduce((acc, key) => {
     if (!(key in objOne)) {
-      return { key: key, value: objTwo[key], type: 'added' };
+      acc[`  + ${key}`] = objTwo[key];
+    } else if (!(key in objTwo)) {
+      acc[`  - ${key}`] = objOne[key];
+    } else if (objOne[key] !== objTwo[key]) {
+      acc[`  - ${key}`] = objOne[key];
+      acc[`  + ${key}`] = objTwo[key];
+    } else {
+      acc[`    ${key}`] = objOne[key];
     }
-    if (!(key in objTwo)) {
-      return { key: key, value: objOne[key], type: 'removed' };
-    }
-    if (objOne[key] !== objTwo[key]) {
-      return { key: key, valueBefore: objOne[key], valueAfter: objTwo[key], type: 'changed' };
-    }
-    return { key: key, value: objOne[key], type: 'unchanged' };
-  });
+    return acc;
+  }, {});
 
-  return showDiff;
+  const formattedDiff = Object.entries(diff).map(([key, value]) => `${key}: ${value}`).join('\n');
+
+  return `{\n${formattedDiff}\n}`;
 };
+
 
 const getDiff = (file1, file2) => {
   const parsedDataFirst = parseFile(file1);
