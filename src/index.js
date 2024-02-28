@@ -8,7 +8,7 @@ const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath, 'utf-8'
 const getFormat = (filename) => path.extname(filename).slice(1);
 
 const parseFile = (filename) => {
-  switch(getFormat(filename)) {
+  switch (getFormat(filename)) {
     case 'json':
       return JSON.parse(readFile(filename));
     case 'yaml':
@@ -43,7 +43,6 @@ const gettingDifferences = (objOne, objTwo) => {
   return `{\n${formattedDiff}\n}`;
 };
 
-
 const getDiff = (file1, file2) => {
   const parsedDataFirst = parseFile(file1);
   const parsedDataSecond = parseFile(file2);
@@ -52,4 +51,6 @@ const getDiff = (file1, file2) => {
   return resultData;
 };
 
-export { getAbsolutePath, readFile, getFormat, gettingDifferences, getDiff };
+export {
+  getAbsolutePath, readFile, getFormat, gettingDifferences, getDiff,
+};
