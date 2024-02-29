@@ -32,7 +32,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
-          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+          CC_TEST_REPORTER_ID: CC_TEST_REPORTER_ID
         with:
-          coverageCommand: npm run coverage
+          coverageCommand: make test-coverage
           debug: true
