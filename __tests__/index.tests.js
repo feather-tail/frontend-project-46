@@ -1,9 +1,13 @@
 // eslint-disable-next-line import/no-unresolved
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import { getDiff } from '../src/index.js';
 
 test('common case', () => {
-  const firstFile = '__fixtures__/file1.json';
-  const secondFile = '__fixtures__/file2.json';
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const firstFile = `${__dirname}/../__fixtures__/file1.json`;
+  const secondFile = `${__dirname}/../__fixtures__/file2.json`;
   const expectedDiff = `{
   - follow: false
     host: hexlet.io
