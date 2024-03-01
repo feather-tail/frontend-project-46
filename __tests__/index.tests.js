@@ -17,4 +17,15 @@ test('common case', () => {
   + verbose: true
 }`;
   expect(getDiff(firstFileJSON, secondFileJSON)).toBe(expectedDiffJSON);
+  const firstFileYML = `${__dirname}/../__fixtures__/file1.json`;
+  const secondFileYML = `${__dirname}/../__fixtures__/file2.json`;
+  const expectedDiffYML = `{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`;
+  expect(getDiff(firstFileYML, secondFileYML)).toBe(expectedDiffYML);
 });
