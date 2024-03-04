@@ -1,22 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import yaml from 'js-yaml';
+import parseFile from './parser.js';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath, 'utf-8'));
 const getFormat = (filename) => path.extname(filename).slice(1);
-
-const parseFile = (filename) => {
-  switch (getFormat(filename)) {
-    case 'json':
-      return JSON.parse(readFile(filename));
-    case 'yaml':
-      return yaml.load(readFile(filename));
-    default:
-      throw new Error('This format is not supported');
-  }
-};
 
 const gettingDifferences = (objOne, objTwo) => {
   const keysFirst = Object.keys(objOne);
