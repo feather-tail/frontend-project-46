@@ -18,6 +18,8 @@ const gettingDifferences = (objOne, objTwo) => {
       acc[`  + ${key}`] = objTwo[key];
     } else if (!(key in objTwo)) {
       acc[`  - ${key}`] = objOne[key];
+    } else if (_.isObject(objOne[key]) && _.isObject(objTwo[key])) {
+      acc[key] = gettingDifferences(objOne[key], objTwo[key]);
     } else if (objOne[key] !== objTwo[key]) {
       acc[`  - ${key}`] = objOne[key];
       acc[`  + ${key}`] = objTwo[key];
@@ -27,7 +29,7 @@ const gettingDifferences = (objOne, objTwo) => {
     return acc;
   }, {});
 
-  const formattedDiff = Object.entries(diff).map(([key, value]) => `${key}: ${value}`).join('\n');
+  const formattedDiff = Object.entries(diff).map(([key, value]) => `${key}: ${_.isObject(value) ? JSON.stringify(value, null, 4) : value}`).join('\n');
 
   return `{\n${formattedDiff}\n}`;
 };

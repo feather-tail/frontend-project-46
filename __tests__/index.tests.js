@@ -30,4 +30,16 @@ test('common case', () => {
   + verbose: true
 }`;
   expect(getDiff(firstFileYML, secondFileYML)).toBe(expectedDiffYML);
+
+  const thirdFileJSON = `${__dirname}/../__fixtures__/file1.json`;
+  const fourthFileJSON = `${__dirname}/../__fixtures__/file2.json`;
+  const expectedDiffSecondJSON = `{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`;
+  expect(getDiff(thirdFileJSON, fourthFileJSON)).toBe(expectedDiffSecondJSON);
 });
