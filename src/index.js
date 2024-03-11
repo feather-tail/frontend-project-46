@@ -15,23 +15,21 @@ const gettingDifferences = (objOne, objTwo) => {
 
   const diff = allKeys.reduce((acc, key) => {
     if (!(key in objOne)) {
-      acc[`  + ${key}`] = objTwo[key];
+      acc[`${key}`] = objTwo[key];
     } else if (!(key in objTwo)) {
-      acc[`  - ${key}`] = objOne[key];
+      acc[`${key}`] = objOne[key];
     } else if (_.isObject(objOne[key]) && _.isObject(objTwo[key])) {
       acc[key] = gettingDifferences(objOne[key], objTwo[key]);
     } else if (objOne[key] !== objTwo[key]) {
-      acc[`  - ${key}`] = objOne[key];
-      acc[`  + ${key}`] = objTwo[key];
+      acc[`${key}`] = objOne[key];
+      acc[`${key}`] = objTwo[key];
     } else {
-      acc[`    ${key}`] = objOne[key];
+      acc[`${key}`] = objOne[key];
     }
     return acc;
   }, {});
 
-  const formattedDiff = Object.entries(diff).map(([key, value]) => `${key}: ${_.isObject(value) ? JSON.stringify(value, null, 4) : value}`).join('\n');
-
-  return `{\n${formattedDiff}\n}`;
+  return diff;
 };
 
 const getDiff = (file1, file2) => {
