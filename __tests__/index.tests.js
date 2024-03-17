@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { getDiff } from '../src/index.js';
+import getDiff from '../src/index.js';
 
 test('common case', () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -10,12 +10,49 @@ test('common case', () => {
   const thirdFileJSON = `${__dirname}/../__fixtures__/file1.json`;
   const fourthFileJSON = `${__dirname}/../__fixtures__/file2.json`;
   const expectedDiffSecondJSON = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: 
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
 }`;
-  expect(getDiff(thirdFileJSON, fourthFileJSON)).toBe(expectedDiffSecondJSON);
+
+  expect(getDiff(thirdFileJSON, fourthFileJSON)).toEqual(expectedDiffSecondJSON);
 });
