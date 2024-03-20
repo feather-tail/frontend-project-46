@@ -8,10 +8,10 @@ Calculating differences between two files in json or yml format.
 
 ## Install
 
-# install dependencies
+### install dependencies
 ``make install``
 
-# install the package
+### install the package
 ``make link``
 
 ## Minimum requirements
@@ -22,17 +22,17 @@ npm: 10.5.0
 
 ## Commands
 
-# help
+### help
 ``make gendiff``
 
-# compare files:
+### compare files:
 ``gendiff -f formatName file1.json file2.json``
 
 ## Demonstration
 
-# Asciinema for stylish format:
+### Asciinema for stylish format:
 
-# Asciinema for plain format:
+### Asciinema for plain format:
 
-# Asciinema for json format:
+### Asciinema for json format:
 
