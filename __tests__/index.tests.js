@@ -4,45 +4,24 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import getDiff from '../src/index.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-test('common case JSON with stylish format', () => {
-  const firstFileJSON = `${__dirname}/../__fixtures__/file1.json`;
-  const secondFileJSON = `${__dirname}/../__fixtures__/file2.json`;
-  const expectedDiffJSON = fs.readFileSync(
-    `${__dirname}/../__tests__/expectedStylishResult.txt`,
-    'utf-8',
-  );
-  expect(getDiff(firstFileJSON, secondFileJSON, 'stylish')).toEqual(expectedDiffJSON);
-});
+const extensions = ['.json', '.yml'];
 
-test('common case YML with stylish format', () => {
-  const firstFileYML = `${__dirname}/../__fixtures__/file1.yml`;
-  const secondFileYML = `${__dirname}/../__fixtures__/file2.yml`;
-  const expectedDiffYML = fs.readFileSync(
-    `${__dirname}/../__tests__/expectedStylishResult.txt`,
-    'utf-8',
-  );
-  expect(getDiff(firstFileYML, secondFileYML, 'stylish')).toEqual(expectedDiffYML);
-});
+const expectedStylishDiff = fs.readFileSync(
+  `${__dirname}/../__tests__/expectedStylishResult.txt`,
+  'utf-8',
+);
+const expectedPlainDiff = fs.readFileSync(
+  `${__dirname}/../__tests__/expectedPlainResult.txt`,
+  'utf-8',
+);
 
-test('common case JSON with plain format', () => {
-  const firstFileJSON = `${__dirname}/../__fixtures__/file1.json`;
-  const secondFileJSON = `${__dirname}/../__fixtures__/file2.json`;
-  const expectedDiffJSON = fs.readFileSync(
-    `${__dirname}/../__tests__/expectedPlainResult.txt`,
-    'utf-8',
-  );
-  expect(getDiff(firstFileJSON, secondFileJSON, 'plain')).toEqual(expectedDiffJSON);
-});
-
-test('common case YML with plain format', () => {
-  const firstFileYML = `${__dirname}/../__fixtures__/file1.yml`;
-  const secondFileYML = `${__dirname}/../__fixtures__/file2.yml`;
-  const expectedDiffYML = fs.readFileSync(
-    `${__dirname}/../__tests__/expectedPlainResult.txt`,
-    'utf-8',
-  );
-  expect(getDiff(firstFileYML, secondFileYML, 'plain')).toEqual(expectedDiffYML);
+extensions.forEach((extension) => {
+  test(`common case ${extension} with stylish and plain formats`, () => {
+    const firstFile = `${__dirname}/../__fixtures__/file1${extension}`;
+    const secondFile = `${__dirname}/../__fixtures__/file2${extension}`;
+    expect(getDiff(firstFile, secondFile, 'stylish')).toEqual(expectedStylishDiff);
+    expect(getDiff(firstFile, secondFile, 'plain')).toEqual(expectedPlainDiff);
+  });
 });
