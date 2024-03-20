@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import parseFile from './parser.js';
-import diff from '../formatters/stylish.js';
+import format from '../formatters/index.js';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const readFile = (filepath) => fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
@@ -30,12 +30,13 @@ const findDifferences = (objOne, objTwo) => {
   });
 };
 
-const getDiff = (file1, file2) => {
+const getDiff = (file1, file2, formatName = 'stylish') => {
   const fileOne = readFile(file1);
   const fileTwo = readFile(file2);
   const parsedDataFirst = parseFile(fileOne, getFormat(file1));
   const parsedDataSecond = parseFile(fileTwo, getFormat(file2));
-  return diff(findDifferences(parsedDataFirst, parsedDataSecond));
+  const differ = findDifferences(parsedDataFirst, parsedDataSecond);
+  return format(differ, formatName);
 };
 
 export default getDiff;
