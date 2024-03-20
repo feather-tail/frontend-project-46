@@ -4,6 +4,9 @@
   "description": "[![Actions Status](https://github.com/feather-tail/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/feather-tail/frontend-project-46/actions)",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "gendiff": "./bin/gendiff.js"
+  },
   "scripts": {
     "test": "npx jest"
   },

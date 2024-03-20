@@ -1,6 +1,7 @@
 import fs from 'fs';
-import path from 'path';
+import path, { dirname } from 'path';
 import _ from 'lodash';
+import { fileURLToPath } from 'url';
 
 const getAbsolutePath = (filePath) => path.resolve(process.cwd(), filePath);
 const readFile = (filePath) => fs.readFileSync(getAbsolutePath(filePath), 'utf-8');
@@ -28,4 +29,8 @@ const findDifferences = (obj1, obj2) => {
   });
 };
 
-export { readFile, getFileFormat, findDifferences };
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export {
+  readFile, getFileFormat, findDifferences, __dirname,
+};

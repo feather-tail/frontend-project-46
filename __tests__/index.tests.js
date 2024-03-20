@@ -1,10 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import fs from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import getDiff from '../src/index.js';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { __dirname } from '../src/utilsFunction.js';
 
 const extensions = ['.json', '.yml'];
 

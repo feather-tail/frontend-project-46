@@ -1,7 +1,10 @@
 install:
 	npm ci
 
-gendiff:
+link:
+	npm link
+
+help:
 	node bin/gendiff.js -h
 
 lint:
