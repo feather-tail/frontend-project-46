@@ -15,7 +15,7 @@ const stringify = (value, depth = 1) => {
   return `{\n${lines.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
-const getStylish = (value, depth = 1) => {
+const formatStylish = (value, depth = 1) => {
   const {
     type, key, valueBefore, valueAfter, children,
   } = value;
@@ -29,10 +29,10 @@ const getStylish = (value, depth = 1) => {
     case 'changed':
       return `${indent}${symbols.deleted} ${key}: ${stringify(valueBefore, depth)}\n${indent}${symbols.added} ${key}: ${stringify(valueAfter, depth)}`;
     case 'nested':
-      return `${indent}${symbols.nested} ${key}: {\n${children.map((val) => getStylish(val, depth + 1)).join('\n')}\n${makeIndent(depth)}  }`; // Добавлено два пробела перед закрывающей скобкой
+      return `${indent}${symbols.nested} ${key}: {\n${children.map((val) => formatStylish(val, depth + 1)).join('\n')}\n${makeIndent(depth)}  }`;
     default:
       throw new Error(`Unknown type: ${type}`);
   }
 };
 
-export default (diff) => `{\n${diff.map((value) => getStylish(value)).join('\n')}\n}`;
+export default (differences) => `{\n${differences.map((value) => formatStylish(value)).join('\n')}\n}`;

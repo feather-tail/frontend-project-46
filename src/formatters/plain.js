@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-const formatPlain = (diff) => {
-  const formatValue = (value) => {
-    if (_.isObject(value)) {
-      return '[complex value]';
-    }
-    if (typeof value === 'string') {
-      return `'${value}'`;
-    }
-    return value;
-  };
+const formatValue = (value) => {
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  return value;
+};
 
+const formatPlain = (differences) => {
   const iter = (data, path = '') => data
     .map((item) => {
       const currentPath = path ? `${path}.${item.key}` : item.key;
@@ -30,7 +30,7 @@ const formatPlain = (diff) => {
     .filter((line) => line !== null)
     .join('\n');
 
-  return iter(diff);
+  return iter(differences);
 };
 
 export default formatPlain;
