@@ -31,10 +31,11 @@ npm: 10.5.0
 
 ## Demonstration
 
-#### Asciinema for stylish format:
+#### Asciinema for stylish formatting:
 [![asciicast](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd.svg)](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd)
 
-#### Asciinema for plain format:
+#### Asciinema for plain formatting:
+[![asciicast](https://asciinema.org/a/QTOxWKRjWsqjmVCXq2fETQMdE.svg)](https://asciinema.org/a/QTOxWKRjWsqjmVCXq2fETQMdE)
 
-#### Asciinema for json format:
+#### Asciinema for json formatting:
 
