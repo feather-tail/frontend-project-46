@@ -32,10 +32,10 @@ npm: 10.5.0
 ## Demonstration
 
 #### Asciinema for stylish formatting:
-[![asciicast](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd.svg)](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd)
+https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd
 
 #### Asciinema for plain formatting:
-[![asciicast](https://asciinema.org/a/QTOxWKRjWsqjmVCXq2fETQMdE.svg)](https://asciinema.org/a/QTOxWKRjWsqjmVCXq2fETQMdE)
+https://asciinema.org/a/QTOxWKRjWsqjmVCXq2fETQMdE
 
 #### Asciinema for json formatting:
-
+https://asciinema.org/a/wZIna3hhRYGKZhqftxc3YyL2T
