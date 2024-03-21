@@ -32,7 +32,7 @@ npm: 10.5.0
 ## Demonstration
 
 #### Asciinema for stylish format:
-https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd
+[![asciicast](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd.svg)](https://asciinema.org/a/r1s5WUG7BIzKrIYSqPTu1sjDd)
 
 #### Asciinema for plain format:
 
